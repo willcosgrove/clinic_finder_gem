@@ -1,11 +1,16 @@
 require_relative './minitest_helper'
 
-class TestClinicFinder < Minitest::Test
-  def test_that_it_has_a_version_number
+class TestClinicFinder < Minitest::Spec
+  it "should have a version number" do
     refute_nil ::ClinicFinder::VERSION
   end
 
-  def test_it_does_something_useful
-    assert true
+  describe "#configure" do
+    it "should let you set the configuration" do
+      ClinicFinder.configure do |config|
+        config.api_token = "whatever"
+      end
+      assert_equal("whatever", ClinicFinder.configuration.api_token)
+    end
   end
 end
