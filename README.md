@@ -1,8 +1,5 @@
 # ClinicFinder
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/clinic_finder`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -16,24 +13,32 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install clinic_finder_gem
-
 ## Usage
 
-TODO: Write usage instructions here
+The ClinicFinder gem is super simple.  First just configure the gem with `ClinicFinder.configure`:
 
-## Development
+```ruby
+ClinicFinder.configure do |config|
+  config.host = "http://clinc_finder.dev" # Where the clinic_finder app is hosted
+  config.api_token = "f98hifbwqeluh19128ye938hd8yg982y/198rh" # Whatever the X-Auth-Token should be
+end
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+Once you've got it all set up, you're ready to start searching!
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/clinic_finder/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+```ruby
+irb(main):004:0> ClinicFinder.search "76134"
+=> [
+  {
+    "name"=>"University Hospital Breast Imaging Services",
+    "address_1"=>"400 West Magnolia",
+    "address_2"=>nil,
+    "address_3"=>nil,
+    "city"=>"Fort Worth",
+    "state"=>"TX",
+    "zip_code"=>"76104",
+    "phone"=>"817288-9883",
+    "fax"=>"817924-1182"
+  }, ...
+]
+```
